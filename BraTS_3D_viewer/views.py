@@ -13,6 +13,8 @@ import datetime
 import torch.nn.functional as F
 from BraTS_3D_viewer.seg_models.unet import UNet
 from BraTS_3D_viewer.datasets.BRATS2018 import NormalizeBRATSVal, ToTensorVal
+import plotly.plotly as py
+import plotly.graph_objs as go
 
 
 # Create your views here.
@@ -55,6 +57,7 @@ def time_stamp() -> str:
 def infer(request, case_name):
     print('{} starts predicting'.format(time_stamp()))
     upload_dir = 'media/cases'
+    seg_dir = 'media/seg'
     model_path = '/home/martin/Documents/semantic_segmentation/UNet-ResidualBlock-Expansion_210_end_to_end_manual/UNet-ResidualBlock-Expansion-BRATS2018-End-to-End_batch6_training_epochs15_Adam_scheduler-step10-gamma1.0_lr5e-05_w_decay3e-05/trained_model.pt'
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     
@@ -103,4 +106,54 @@ def infer(request, case_name):
     print('{} finishes predicting'.format(time_stamp()))
     print(np.unique(preds), preds.shape)
 
+    if not os.path.exists(seg_dir):
+        os.makedirs(seg_dir)
+    
+    np.save(os.path.join(seg_dir, case_name), preds)
+
     return JsonResponse({'labels': np.unique(preds).tolist()})
+
+def view3D(request, case_name):
+    seg_dir = 'media/seg'
+    try:
+        preds = np.load(os.path.join(seg_dir, case_name + '.npy'))
+        assert preds.shape = (155, 240, 240)
+
+        print('{} start preparing'.format(time_stamp()))
+        et_indices = np.argwhere(preds == 3.)
+        et_xs = [ind[0] for ind in et_indices]
+        et_ys = [ind[1] for ind in et_indices]
+        et_zs = [ind[2] for ind in et_indices]
+
+        edema_indices = np.argwhere(preds == 2.)
+        edema_xs = [ind[0] for ind in edema_indices]
+        edema_ys = [ind[1] for ind in edema_indices]
+        edema_zs = [ind[2] for ind in edema_indices]
+
+        necrotic_indices = np.argwhere(preds == 1.)
+        necrotic_xs = [ind[0] for ind in necrotic_indices]
+        necrotic_ys = [ind[1] for ind in necrotic_indices]
+        necrotic_zs = [ind[2] for ind in necrotic_indices]
+
+        seg_xs = et_xs + edema_xs + necrotic_xs
+        seg_ys = et_ys + edema_ys + necrotic_ys
+        seg_zs = et_zs + edema_zs + necrotic_zs
+        seg_color = [3] * len(et_xs) + [2] * len(edema_xs) + [1] * len(necrotic_xs)
+        print('{} finish preparing'.format(time_stamp()))
+
+        trace_seg = go.Scatter3d(
+            x=seg_xs,
+            y=seg_ys,
+            z=seg_zs,
+            mode='markers',
+            marker={
+                'size': 3,
+                'color': seg_color,
+                'colorscale': 'Viridis',
+                'opacity': 0.8
+            }
+        )
+        data_seg = [trace_seg]
+        fig_seg = go.Figure(data=data_seg, layout=layout)
+        py.iplot(fig_seg, filename='3D-Glioma-segmentation')
+        print('{} finish plotting'.format(time_stamp()))
