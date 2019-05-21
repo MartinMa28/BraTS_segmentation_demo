@@ -58,6 +58,13 @@ def infer(request, case_name):
     print('{} starts predicting'.format(time_stamp()))
     upload_dir = 'media/cases'
     seg_dir = 'media/seg'
+
+    if not os.path.exists(seg_dir):
+        os.makedirs(seg_dir)
+    
+    if os.path.exists(os.path.join(seg_dir, case_name + '.npy')):
+        JsonResponse({'status': 'already inferred'})
+
     model_path = '/home/martin/Documents/semantic_segmentation/UNet-ResidualBlock-Expansion_210_end_to_end_manual/UNet-ResidualBlock-Expansion-BRATS2018-End-to-End_batch6_training_epochs15_Adam_scheduler-step10-gamma1.0_lr5e-05_w_decay3e-05/trained_model.pt'
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     
@@ -153,6 +160,16 @@ def view3D(request, case_name):
                 'opacity': 0.8
             }
         )
+
+        layout = go.Layout(
+            margin=dict(
+                l=0,
+                r=0,
+                b=0,
+                t=0
+            )
+        )
+
         data_seg = [trace_seg]
         fig_seg = go.Figure(data=data_seg, layout=layout)
         py.iplot(fig_seg, filename='3D-Glioma-segmentation')
