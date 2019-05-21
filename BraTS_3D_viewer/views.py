@@ -59,7 +59,7 @@ def infer(request, case_name):
 
     t1_path = os.path.join(upload_dir, case_name + '_t1.nii.gz')
     t1ce_path = os.path.join(upload_dir, case_name + '_t1ce.nii.gz')
-    t2_path = os.path.join(upload_dir, case_name, '_t2.nii.gz')
+    t2_path = os.path.join(upload_dir, case_name + '_t2.nii.gz')
     flair_path = os.path.join(upload_dir, case_name + '_flair.nii.gz')
 
     t1 = nib.load(t1_path).get_data()
