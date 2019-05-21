@@ -10,8 +10,8 @@ import nibabel as nib
 import time
 import datetime
 import torch.nn.functional as F
-from seg_models.unet import UNet
-from datasets.BRATS2018 import NormalizeBRATSVal, ToTensorVal
+from BraTS_3D_viewer.seg_models.unet import UNet
+from BraTS_3D_viewer.datasets.BRATS2018 import NormalizeBRATSVal, ToTensorVal
 
 
 # Create your views here.
