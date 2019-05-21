@@ -13,3 +13,10 @@ def index(request):
             ctx['files'].append(f.name)
     
     return render(request, 'BraTS_3D_viewer/index.html', context=ctx)
+
+def case_list(request):
+    return render(request, 'BraTS_3D_viewer/case_list.html')
+
+def upload_case(request):
+    return render(request, 'BraTS_3D_viewer/upload.html')
+
