@@ -117,7 +117,7 @@ def view3D(request, case_name):
     seg_dir = 'media/seg'
     try:
         preds = np.load(os.path.join(seg_dir, case_name + '.npy'))
-        assert preds.shape = (155, 240, 240)
+        assert preds.shape == (155, 240, 240)
 
         print('{} start preparing'.format(time_stamp()))
         et_indices = np.argwhere(preds == 3.)
@@ -157,3 +157,7 @@ def view3D(request, case_name):
         fig_seg = go.Figure(data=data_seg, layout=layout)
         py.iplot(fig_seg, filename='3D-Glioma-segmentation')
         print('{} finish plotting'.format(time_stamp()))
+
+        return JsonResponse({'status': 'normal'})
+    except:
+        return JsonResponse({'status': 'internal_error'})
