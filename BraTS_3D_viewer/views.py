@@ -57,6 +57,7 @@ def infer(request, case_name):
     upload_dir = 'media/cases'
     model_path = '/home/martin/Documents/semantic_segmentation/UNet-ResidualBlock-Expansion_210_end_to_end_manual/UNet-ResidualBlock-Expansion-BRATS2018-End-to-End_batch6_training_epochs15_Adam_scheduler-step10-gamma1.0_lr5e-05_w_decay3e-05/trained_model.pt'
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+    print(device)
 
     t1_path = os.path.join(upload_dir, case_name + '_t1.nii.gz')
     t1ce_path = os.path.join(upload_dir, case_name + '_t1ce.nii.gz')
