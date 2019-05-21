@@ -103,4 +103,4 @@ def infer(request, case_name):
     print('{} finishes predicting'.format(time_stamp()))
     print(np.unique(preds), preds.shape)
 
-    return JsonResponse({'labels': np.unique(preds).to_list()})
+    return JsonResponse({'labels': np.unique(preds).tolist()})
