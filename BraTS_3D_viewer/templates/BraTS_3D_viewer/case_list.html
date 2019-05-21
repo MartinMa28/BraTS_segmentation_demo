@@ -3,20 +3,29 @@
 {% block content %}
     <h2>MRI case list</h2>
     <a href="{% url 'BraTS_3D_viewer:case_upload' %}" class="btn btn-primary">Upload new MRI cases</a>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Case ID</th>
-                <th>Retrieve ID</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for c in cases %}
-            <tr>
-                <td>{{ c.case_id }}</td>
-                <td>{{ c.id }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col" id="case_list_container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Case ID</th>
+                            <th>Retrieve ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for c in cases %}
+                        <tr>
+                            <td>{{ c.case_id }}</td>
+                            <td>{{ c.id }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col" id="3D_viewer_container">
+                <iframe width="900" height="800" frameborder="0" scrolling="no" src="//plot.ly/~MartinMa28/108.embed"></iframe>
+            </div>
+        </div>
+    </div>
 {% endblock %}
