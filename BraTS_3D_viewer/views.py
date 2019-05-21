@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
+from .forms import MRICaseForm
+from .models import MRICase
 
 # Create your views here.
 def index(request):
@@ -15,8 +17,21 @@ def index(request):
     return render(request, 'BraTS_3D_viewer/index.html', context=ctx)
 
 def case_list(request):
-    return render(request, 'BraTS_3D_viewer/case_list.html')
+    cases = MRICase.objects.all()
+    return render(request, 'BraTS_3D_viewer/case_list.html', context={
+        'cases': cases
+    })
 
 def upload_case(request):
-    return render(request, 'BraTS_3D_viewer/upload.html')
+    if request.method == 'POST':
+        form = MRICaseForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('BraTS_3D_viewer:case_list')
+
+    # for GET request        
+    form = MRICaseForm()
+    return render(request, 'BraTS_3D_viewer/upload.html', context={
+        'form': form
+    })
 
