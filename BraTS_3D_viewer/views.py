@@ -63,7 +63,7 @@ def infer(request, case_name):
         os.makedirs(seg_dir)
     
     if os.path.exists(os.path.join(seg_dir, case_name + '.npy')):
-        JsonResponse({'status': 'already inferred'})
+        return JsonResponse({'status': 'already inferred'})
 
     model_path = '/home/martin/Documents/semantic_segmentation/UNet-ResidualBlock-Expansion_210_end_to_end_manual/UNet-ResidualBlock-Expansion-BRATS2018-End-to-End_batch6_training_epochs15_Adam_scheduler-step10-gamma1.0_lr5e-05_w_decay3e-05/trained_model.pt'
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
