@@ -1,4 +1,5 @@
 {% extends 'BraTS_3D_viewer/base.html' %}
+{% load static %}
 
 {% block content %}
     <h2>MRI case list</h2>
@@ -11,6 +12,7 @@
                         <tr>
                             <th>Case ID</th>
                             <th>Retrieve ID</th>
+                            <th>Operations</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -18,6 +20,10 @@
                         <tr>
                             <td>{{ c.case_id }}</td>
                             <td>{{ c.id }}</td>
+                            <td>
+                                <button class="btn btn-light inference" data-case-name="{{ c.case_id }}">Predict</button>
+                                <button class="btn btn-light view3D" data-case-name="{{ c.case_id }}">View</button>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -28,4 +34,8 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block js_scripts %}
+    <script src="{% static 'BraTS_3D_viewer/js/scripts.js' %}"></script>
 {% endblock %}

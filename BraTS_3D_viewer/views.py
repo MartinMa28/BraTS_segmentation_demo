@@ -180,35 +180,37 @@ def view3D(request, case_name):
 
 def get_labels(request, case_name):
     seg_dir = 'media/seg'
-    
-    preds = np.load(os.path.join(seg_dir, case_name + '.npy'))
-    assert preds.shape == (155, 240, 240)
+    try:
+        preds = np.load(os.path.join(seg_dir, case_name + '.npy'))
+        assert preds.shape == (155, 240, 240)
 
-    print('{} start preparing'.format(time_stamp()))
-    et_indices = np.argwhere(preds == 3.)
-    et_xs = [int(ind[0]) for ind in et_indices]
-    et_ys = [int(ind[1]) for ind in et_indices]
-    et_zs = [int(ind[2]) for ind in et_indices]
+        print('{} start preparing'.format(time_stamp()))
+        et_indices = np.argwhere(preds == 3.)
+        et_xs = [int(ind[0]) for ind in et_indices]
+        et_ys = [int(ind[1]) for ind in et_indices]
+        et_zs = [int(ind[2]) for ind in et_indices]
 
-    edema_indices = np.argwhere(preds == 2.)
-    edema_xs = [int(ind[0]) for ind in edema_indices]
-    edema_ys = [int(ind[1]) for ind in edema_indices]
-    edema_zs = [int(ind[2]) for ind in edema_indices]
+        edema_indices = np.argwhere(preds == 2.)
+        edema_xs = [int(ind[0]) for ind in edema_indices]
+        edema_ys = [int(ind[1]) for ind in edema_indices]
+        edema_zs = [int(ind[2]) for ind in edema_indices]
 
-    necrotic_indices = np.argwhere(preds == 1.)
-    necrotic_xs = [int(ind[0]) for ind in necrotic_indices]
-    necrotic_ys = [int(ind[1]) for ind in necrotic_indices]
-    necrotic_zs = [int(ind[2]) for ind in necrotic_indices]
+        necrotic_indices = np.argwhere(preds == 1.)
+        necrotic_xs = [int(ind[0]) for ind in necrotic_indices]
+        necrotic_ys = [int(ind[1]) for ind in necrotic_indices]
+        necrotic_zs = [int(ind[2]) for ind in necrotic_indices]
 
-    seg_xs = et_xs + edema_xs + necrotic_xs
-    seg_ys = et_ys + edema_ys + necrotic_ys
-    seg_zs = et_zs + edema_zs + necrotic_zs
-    seg_color = [3] * len(et_xs) + [2] * len(edema_xs) + [1] * len(necrotic_xs)
+        seg_xs = et_xs + edema_xs + necrotic_xs
+        seg_ys = et_ys + edema_ys + necrotic_ys
+        seg_zs = et_zs + edema_zs + necrotic_zs
+        seg_color = [3] * len(et_xs) + [2] * len(edema_xs) + [1] * len(necrotic_xs)
 
-    return JsonResponse({
-        'xs': seg_xs,
-        'ys': seg_ys,
-        'zs': seg_zs,
-        'colors': seg_color,
-        'length': len(seg_color) 
-    })
+        return JsonResponse({
+            'xs': seg_xs,
+            'ys': seg_ys,
+            'zs': seg_zs,
+            'colors': seg_color,
+            'length': len(seg_color) 
+        })
+    except:
+        return JsonResponse({'status': 'internal_error'})
