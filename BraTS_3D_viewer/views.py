@@ -117,8 +117,34 @@ def infer(request, case_name):
         os.makedirs(seg_dir)
     
     np.save(os.path.join(seg_dir, case_name), preds)
+    
+    et_indices = np.argwhere(preds == 3.)
+    et_xs = [ind[0] for ind in et_indices]
+    et_ys = [ind[1] for ind in et_indices]
+    et_zs = [ind[2] for ind in et_indices]
 
-    return JsonResponse({'labels': np.unique(preds).tolist()})
+    edema_indices = np.argwhere(preds == 2.)
+    edema_xs = [ind[0] for ind in edema_indices]
+    edema_ys = [ind[1] for ind in edema_indices]
+    edema_zs = [ind[2] for ind in edema_indices]
+
+    necrotic_indices = np.argwhere(preds == 1.)
+    necrotic_xs = [ind[0] for ind in necrotic_indices]
+    necrotic_ys = [ind[1] for ind in necrotic_indices]
+    necrotic_zs = [ind[2] for ind in necrotic_indices]
+
+    seg_xs = et_xs + edema_xs + necrotic_xs
+    seg_ys = et_ys + edema_ys + necrotic_ys
+    seg_zs = et_zs + edema_zs + necrotic_zs
+    seg_color = [3] * len(et_xs) + [2] * len(edema_xs) + [1] * len(necrotic_xs)
+    return JsonResponse({
+        'xs': seg_xs.tolist(),
+        'ys': seg_ys.tolist(),
+        'zs': seg_zs.tolist(),
+        'seg_color': seg_color,
+        'length': len(seg_color)
+        })
+
 
 def view3D(request, case_name):
     seg_dir = 'media/seg'
