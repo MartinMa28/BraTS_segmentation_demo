@@ -186,19 +186,19 @@ def get_labels(request, case_name):
 
     print('{} start preparing'.format(time_stamp()))
     et_indices = np.argwhere(preds == 3.)
-    et_xs = [ind[0] for ind in et_indices]
-    et_ys = [ind[1] for ind in et_indices]
-    et_zs = [ind[2] for ind in et_indices]
+    et_xs = [int(ind[0]) for ind in et_indices]
+    et_ys = [int(ind[1]) for ind in et_indices]
+    et_zs = [int(ind[2]) for ind in et_indices]
 
     edema_indices = np.argwhere(preds == 2.)
-    edema_xs = [ind[0] for ind in edema_indices]
-    edema_ys = [ind[1] for ind in edema_indices]
-    edema_zs = [ind[2] for ind in edema_indices]
+    edema_xs = [int(ind[0]) for ind in edema_indices]
+    edema_ys = [int(ind[1]) for ind in edema_indices]
+    edema_zs = [int(ind[2]) for ind in edema_indices]
 
     necrotic_indices = np.argwhere(preds == 1.)
-    necrotic_xs = [ind[0] for ind in necrotic_indices]
-    necrotic_ys = [ind[1] for ind in necrotic_indices]
-    necrotic_zs = [ind[2] for ind in necrotic_indices]
+    necrotic_xs = [int(ind[0]) for ind in necrotic_indices]
+    necrotic_ys = [int(ind[1]) for ind in necrotic_indices]
+    necrotic_zs = [int(ind[2]) for ind in necrotic_indices]
 
     seg_xs = et_xs + edema_xs + necrotic_xs
     seg_ys = et_ys + edema_ys + necrotic_ys
