@@ -8,4 +8,5 @@ urlpatterns = [
     path('cases/upload', views.upload_case, name='case_upload'),
     path('inference/<str:case_name>', views.infer),
     path('view/<str:case_name>', views.view3D),
+    path('labels/<str:case_name>', views.get_labels),
 ]
