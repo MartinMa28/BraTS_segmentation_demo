@@ -16,7 +16,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="BraTS_3D_viewer:case_upload" method="POST" enctype="multipart/form-data">
+                    <form action="{% url 'BraTS_3D_viewer:case_upload' %}" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form }}
                         <button type="submit">Upload</button>
