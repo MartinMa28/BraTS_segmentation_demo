@@ -1,6 +1,14 @@
 document.querySelectorAll('button.inference').forEach((btn) => {
     btn.addEventListener('click', () => {
         console.log("inference " + btn.dataset.caseName);
+        fetch(`http://10.253.218.12:8000/inference/${btn.dataset.caseName}`)
+            .then((res) => {
+                alert(res);
+                btn.textContent = "Predict";
+            })
+            .catch((err) => {alert(err);});
+        
+        btn.textContent = "Predicting ..."
     });
 });
 
