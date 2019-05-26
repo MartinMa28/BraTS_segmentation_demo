@@ -35,6 +35,8 @@ document.querySelectorAll('button.view3D').forEach((btn) => {
                     type: 'scatter3d'
                 };
 
+                console.log(trace);
+
                 let scatterData = [trace];
                 
                 let layout = {
