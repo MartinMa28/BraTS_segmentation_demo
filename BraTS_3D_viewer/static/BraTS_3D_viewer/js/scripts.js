@@ -28,9 +28,9 @@ document.querySelectorAll('button.view3D').forEach((btn) => {
                     y: data.et_ys,
                     z: data.et_zs,
                     mode: 'markers',
-                    markers: {
+                    marker: {
                         size: 2,
-                        color: 'rgb(255, 255, 102)',
+                        color: 'rgb(255, 255, 79)',
                         opacity: 0.8
                     },
                     type: 'scatter3d'
