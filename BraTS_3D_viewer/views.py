@@ -200,11 +200,6 @@ def get_labels(request, case_name):
         necrotic_ys = [int(ind[1]) for ind in necrotic_indices]
         necrotic_zs = [int(ind[2]) for ind in necrotic_indices]
 
-        # seg_xs = et_xs + edema_xs + necrotic_xs
-        # seg_ys = et_ys + edema_ys + necrotic_ys
-        # seg_zs = et_zs + edema_zs + necrotic_zs
-        # seg_color = [3] * len(et_xs) + [2] * len(edema_xs) + [1] * len(necrotic_xs)
-
         return JsonResponse({
             'et_xs': et_xs,
             'et_ys': et_ys,

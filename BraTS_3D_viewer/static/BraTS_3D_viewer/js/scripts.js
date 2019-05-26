@@ -29,7 +29,7 @@ document.querySelectorAll('button.view3D').forEach((btn) => {
                     z: data.et_zs,
                     mode: 'markers',
                     marker: {
-                        size: 2,
+                        size: 3,
                         color: 'rgb(255, 255, 79)',
                         opacity: 0.8
                     },
@@ -42,7 +42,7 @@ document.querySelectorAll('button.view3D').forEach((btn) => {
                     z: data.edema_zs,
                     mode: 'markers',
                     marker: {
-                        size: 2,
+                        size: 3,
                         color: 'rgb(0, 153, 153)',
                         opacity: 0.8
                     },
@@ -55,7 +55,7 @@ document.querySelectorAll('button.view3D').forEach((btn) => {
                     z: data.necrotic_zs,
                     mode: 'markers',
                     marker: {
-                        size: 2,
+                        size: 3,
                         color: 'rgb(104, 47, 162)',
                         opacity: 0.8
                     },
