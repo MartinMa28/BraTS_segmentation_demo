@@ -46,7 +46,7 @@ document.querySelectorAll('button.view3D').forEach((btn) => {
                     }
                 };
 
-                Plotly.newPlot('3D_viewer_container', scatterData, layout);
+                Plotly.newPlot('viewer_container', scatterData, layout);
                 
                 btn.textContent = 'View';
             })
