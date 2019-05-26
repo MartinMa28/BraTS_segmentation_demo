@@ -19,25 +19,50 @@ document.querySelectorAll('button.view3D').forEach((btn) => {
         fetch(`http://10.253.218.12:8000/labels/${btn.dataset.caseName}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data.length)
+                console.log(`Enhancing tumor length: ${data.et_length}`);
+                console.log(`Edema length: ${data.edema_length}`);
+                console.log(`Necrotic tumor length: ${data.necrotic_length}`);
                 
-                let trace = {
-                    x: data.xs,
-                    y: data.ys,
-                    z: data.zs,
+                let etTrace = {
+                    x: data.et_xs,
+                    y: data.et_ys,
+                    z: data.et_zs,
                     mode: 'markers',
                     markers: {
-                        size: 3,
-                        color: data.colors,
-                        colorscale: 'Viridis',
+                        size: 2,
+                        color: 'rgb(255, 255, 102)',
                         opacity: 0.8
                     },
                     type: 'scatter3d'
                 };
 
-                console.log(trace);
+                let edemaTrace = {
+                    x: data.edema_xs,
+                    y: data.edema_ys,
+                    z: data.edema_zs,
+                    mode: 'markers',
+                    marker: {
+                        size: 2,
+                        color: 'rgb(0, 153, 153)',
+                        opacity: 0.8
+                    },
+                    type: 'scatter3d'
+                };
 
-                let scatterData = [trace];
+                let necroticTrace = {
+                    x: data.necrotic_xs,
+                    y: data.necrotic_ys,
+                    z: data.necrotic_zs,
+                    mode: 'markers',
+                    marker: {
+                        size: 2,
+                        color: 'rgb(104, 47, 162)',
+                        opacity: 0.8
+                    },
+                    type: 'scatter3d'
+                };
+
+                let scatterData = [etTrace, edemaTrace, necroticTrace];
                 
                 let layout = {
                     margin: {

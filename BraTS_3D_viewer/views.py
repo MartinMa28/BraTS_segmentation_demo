@@ -200,17 +200,24 @@ def get_labels(request, case_name):
         necrotic_ys = [int(ind[1]) for ind in necrotic_indices]
         necrotic_zs = [int(ind[2]) for ind in necrotic_indices]
 
-        seg_xs = et_xs + edema_xs + necrotic_xs
-        seg_ys = et_ys + edema_ys + necrotic_ys
-        seg_zs = et_zs + edema_zs + necrotic_zs
-        seg_color = [3] * len(et_xs) + [2] * len(edema_xs) + [1] * len(necrotic_xs)
+        # seg_xs = et_xs + edema_xs + necrotic_xs
+        # seg_ys = et_ys + edema_ys + necrotic_ys
+        # seg_zs = et_zs + edema_zs + necrotic_zs
+        # seg_color = [3] * len(et_xs) + [2] * len(edema_xs) + [1] * len(necrotic_xs)
 
         return JsonResponse({
-            'xs': seg_xs,
-            'ys': seg_ys,
-            'zs': seg_zs,
-            'colors': seg_color,
-            'length': len(seg_color) 
+            'et_xs': et_xs,
+            'et_ys': et_ys,
+            'et_zs': et_zs,
+            'edema_xs': edema_xs,
+            'edema_ys': edema_ys,
+            'edema_zs': edema_zs,
+            'necrotic_xs': necrotic_xs,
+            'necrotic_ys': necrotic_ys,
+            'necrotic_zs': necrotic_zs,
+            'et_length': len(et_xs),
+            'edema_length': len(edema_xs),
+            'necrotic_length': len(necrotic_xs) 
         })
     except:
         return JsonResponse({'status': 'internal_error'})
