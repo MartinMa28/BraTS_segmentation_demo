@@ -4,7 +4,7 @@ document.querySelectorAll('button.inference').forEach((btn) => {
         fetch(`http://10.253.218.12:8000/inference/${btn.dataset.caseName}`)
             .then(res => res.json())
             .then(data => {
-                console.log(JSON.stringify(data));
+                console.log(JSON.stringify(data).length);
                 btn.textContent = 'Predict';
             })
             .catch((err) => {alert(err);});
