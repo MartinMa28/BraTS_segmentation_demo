@@ -4,6 +4,28 @@
 {% block content %}
     <h2>MRI case list</h2>
     <a href="{% url 'BraTS_3D_viewer:case_upload' %}" class="btn btn-primary">Upload new MRI cases</a>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload-MRI-modal">Upload new MRI cases</button>
+    <!-- modal -->
+    <div class="modal fade" id="upload-MRI-modal" role="dialog" tabindex="-1" aria-labelledby="upload-MRI-modal-title" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="upload-MRI-modal-title">Upload MRI</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="BraTS_3D_viewer:case_upload" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form }}
+                        <button type="submit">Upload</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal -->
     <div class="container-fluid">
         <div class="row">
             <div class="col" id="case_list_container">

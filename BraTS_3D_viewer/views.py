@@ -31,9 +31,14 @@ def index(request):
     return render(request, 'BraTS_3D_viewer/index.html', context=ctx)
 
 def case_list(request):
+    # case list
     cases = MRICase.objects.all()
+    # upload form
+    form = MRICaseForm()
+
     return render(request, 'BraTS_3D_viewer/case_list.html', context={
-        'cases': cases
+        'cases': cases,
+        'form': form
     })
 
 def upload_case(request):
