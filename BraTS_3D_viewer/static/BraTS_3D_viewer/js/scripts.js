@@ -19,16 +19,16 @@ document.querySelectorAll('button.view3D').forEach((btn) => {
         fetch(`http://10.253.218.12:8000/labels/${btn.dataset.caseName}`)
             .then(res => res.json())
             .then(data => {
-                console.log(JSON.parse(data).length);
-                let inferenceLabels = JSON.parse(data)
+                console.log(data.length)
+                
                 let trace = {
-                    x: inferenceLabels.xs,
-                    y: inferenceLabels.ys,
-                    z: inferenceLabels.zs,
+                    x: data.xs,
+                    y: data.ys,
+                    z: data.zs,
                     mode: 'markers',
                     markers: {
                         size: 3,
-                        color: inferenceLabels.colors,
+                        color: data.colors,
                         colorscale: 'Viridis',
                         opacity: 0.8
                     },
