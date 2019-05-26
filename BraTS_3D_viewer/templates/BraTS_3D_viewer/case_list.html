@@ -1,13 +1,14 @@
 {% extends 'BraTS_3D_viewer/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     <h2>MRI case list</h2>
-    <a href="{% url 'BraTS_3D_viewer:case_upload' %}" class="btn btn-primary">Upload new MRI cases</a>
+    
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload-MRI-modal">Upload new MRI cases</button>
     <!-- modal -->
     <div class="modal fade" id="upload-MRI-modal" role="dialog" tabindex="-1" aria-labelledby="upload-MRI-modal-title" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="upload-MRI-modal-title">Upload MRI</h5>
@@ -18,7 +19,7 @@
                 <div class="modal-body">
                     <form action="{% url 'BraTS_3D_viewer:case_upload' %}" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {{ form }}
+                        {{ form|crispy }}
                         <button type="submit">Upload</button>
                     </form>
                 </div>
