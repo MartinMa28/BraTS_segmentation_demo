@@ -43,13 +43,22 @@ def upload_case(request):
         'form': form
     })
 
-def time_stamp() -> str:
+def delete_case(request, pk):
+    if request.method == 'GET':
+        case = MRICase.objects.get(pk=pk)
+        case.delete()
+
+    return redirect('BraTS_3D_viewer:case_list')
+
+
+
+def _time_stamp() -> str:
     ts = time.time()
     time_stamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
     return time_stamp
 
 def infer(request, case_name):
-    print('{} starts predicting'.format(time_stamp()))
+    print('{} starts predicting'.format(_time_stamp()))
     upload_dir = 'media/cases'
     seg_dir = 'media/seg'
 
@@ -104,7 +113,7 @@ def infer(request, case_name):
         pred = pred.cpu().numpy()
         preds[i] = pred
     
-    print('{} finishes predicting'.format(time_stamp()))
+    print('{} finishes predicting'.format(_time_stamp()))
     print(np.unique(preds), preds.shape)
     
     np.save(os.path.join(seg_dir, case_name), preds)
@@ -118,7 +127,7 @@ def view3D(request, case_name):
         preds = np.load(os.path.join(seg_dir, case_name + '.npy'))
         assert preds.shape == (155, 240, 240)
 
-        print('{} start preparing'.format(time_stamp()))
+        print('{} start preparing'.format(_time_stamp()))
         et_indices = np.argwhere(preds == 3.)
         et_xs = [ind[0] for ind in et_indices]
         et_ys = [ind[1] for ind in et_indices]
@@ -138,7 +147,7 @@ def view3D(request, case_name):
         seg_ys = et_ys + edema_ys + necrotic_ys
         seg_zs = et_zs + edema_zs + necrotic_zs
         seg_color = [3] * len(et_xs) + [2] * len(edema_xs) + [1] * len(necrotic_xs)
-        print('{} finish preparing'.format(time_stamp()))
+        print('{} finish preparing'.format(_time_stamp()))
 
         trace_seg = go.Scatter3d(
             x=seg_xs,
@@ -165,7 +174,7 @@ def view3D(request, case_name):
         data_seg = [trace_seg]
         fig_seg = go.Figure(data=data_seg, layout=layout)
         py.iplot(fig_seg, filename='3D-Glioma-segmentation')
-        print('{} finish plotting'.format(time_stamp()))
+        print('{} finish plotting'.format(_time_stamp()))
 
         return JsonResponse({'status': 'normal'})
     except:
@@ -178,7 +187,7 @@ def get_labels(request, case_name):
         preds = np.load(os.path.join(seg_dir, case_name + '.npy'))
         assert preds.shape == (155, 240, 240)
 
-        print('{} start preparing'.format(time_stamp()))
+        print('{} start preparing'.format(_time_stamp()))
         et_indices = np.argwhere(preds == 3.)
         et_xs = [int(ind[0]) for ind in et_indices]
         et_ys = [int(ind[1]) for ind in et_indices]

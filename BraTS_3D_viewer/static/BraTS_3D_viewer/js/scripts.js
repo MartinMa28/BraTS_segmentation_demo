@@ -13,6 +13,18 @@ document.querySelectorAll('button.inference').forEach((btn) => {
     });
 });
 
+document.querySelectorAll('button.delete_case').forEach((btn) => {
+    btn.addEventListener('click', () => {
+        console.log(`Delete ${btn.dataset.id}`);
+        console.log((HOSTNAME_URL + RESTfulAPI_URLS.delete_case).replace(999, btn.dataset.id));
+
+        fetch(('http://' + HOSTNAME_URL + RESTfulAPI_URLS.delete_case).replace(999, btn.dataset.id))
+        .catch(err => {alert(err)});
+
+        location.reload();
+    });
+});
+
 document.querySelectorAll('button.view3D').forEach((btn) => {
     btn.addEventListener('click', () => {
         console.log("3D view " + btn.dataset.caseName);

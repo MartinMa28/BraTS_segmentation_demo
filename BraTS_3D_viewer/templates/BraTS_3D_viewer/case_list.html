@@ -46,6 +46,7 @@
                             <td>
                                 <button class="btn btn-light inference" data-case-name="{{ c.case_id }}">Predict</button>
                                 <button class="btn btn-light view3D" data-case-name="{{ c.case_id }}">View</button>
+                                <button class="btn btn-danger delete_case" data-id="{{ c.id }}">Delete</button>
                             </td>
                         </tr>
                         {% endfor %}
@@ -60,6 +61,12 @@
 {% endblock %}
 
 {% block js_scripts %}
+    <script>
+        const HOSTNAME_URL = "{{ request.get_host }}";
+        const RESTfulAPI_URLS = {
+            delete_case: "{% url 'BraTS_3D_viewer:case_delete' 999 %}"
+        };
+    </script>
     <script src="{% static 'BraTS_3D_viewer/js/plotly-latest.min.js' %}"></script>
     <script src="{% static 'BraTS_3D_viewer/js/scripts.js' %}"></script>
 {% endblock %}
