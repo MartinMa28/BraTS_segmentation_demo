@@ -28,3 +28,12 @@ header nav.navbar {
 .thumbnail-image:hover {
     cursor: pointer;
 }
+
+/* footer */
+#page-footer {
+    height: 150px;
+}
+
+#page-footer h3 {
+    font-family: "Trebuchet MS", sans-serif;
+}

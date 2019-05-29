@@ -2,9 +2,35 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
+
 {% block css_link %}
     <link rel="stylesheet" href="{% static 'BraTS_3D_viewer/css/case_list.css' %}">
 {% endblock %}
+
+
+{% block header %}
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="https://github.com/MartinMa28">Yilin Ma Github profile</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/MartinMa28/brain-tumor-segmentation">Github Repo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.cbica.upenn.edu/BraTS18/lboardValidation.html">BraTS leaderboard</a>
+                    </li>
+                </ul>
+                <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#upload-MRI-modal">New MRI</button>
+            </div>
+        </nav>
+    </header>
+{% endblock %}
+
 
 {% block content %}
     <style type="text/css">
@@ -16,8 +42,7 @@
         }
     </style>
     <div class="jumbotron jumbotron-fluid"></div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload-MRI-modal">Upload new MRI cases</button>
-    
+
     <!-- modal -->
     <div class="modal fade" id="upload-MRI-modal" role="dialog" tabindex="-1" aria-labelledby="upload-MRI-modal-title" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -70,6 +95,7 @@
         </div>
     </div>
 {% endblock %}
+
 
 {% block js_scripts %}
     <script>

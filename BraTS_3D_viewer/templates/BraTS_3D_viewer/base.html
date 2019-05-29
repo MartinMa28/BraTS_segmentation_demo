@@ -13,21 +13,30 @@
     {% block css_link %}
     
     {% endblock %}
-    
+
     <title>Glioma Segmentation</title>
   </head>
   <body>
 
-    <header>
-        <nav class="navbar navbar navbar-dark bg-dark">
-          <a class="navbar-brand" href="https://github.com/MartinMa28">Yilin Ma Github profile</a>
-        </nav>
-    </header>
+    {% block header %}
 
+    {% endblock %}
     
     {% block content %}
 
     {% endblock %}
+
+    <div class="container-fluid bg-dark text-center mt-3 py-3" id="page-footer">
+      <h3 class="font-weight-lighter text-white">Contact Yilin?</h3>
+      <h2 class="font-weight-bold text-white">Your feedback is appreciated.</h2>
+      <div class="py-2">
+        <hr style="border-top-color: rgba(255, 255, 255, 0.4);">
+      </div>
+      <div class="order-2">
+        
+      </div>
+    </div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
