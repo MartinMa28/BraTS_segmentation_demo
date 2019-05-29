@@ -10,3 +10,12 @@ class MRICase(models.Model):
 
     def __str__(self):
         return self.case_id
+
+    def delete(self, *args, **kwargs):
+        # delete the uploaded files before calling base class's delete method
+        self.t1.delete()
+        self.t1ce.delete()
+        self.t2.delete()
+        self.flair.delete()
+
+        super().delete(*args, **kwargs)
