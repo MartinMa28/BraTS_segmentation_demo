@@ -3,7 +3,7 @@ document.querySelectorAll('button.inference').forEach((btn) => {
         console.log("inference " + btn.dataset.caseName);
         let requestURL = (HOSTNAME_URL + RESTfulAPI_URLS.inference).replace(999, btn.dataset.caseName);
         console.log(requestURL);
-        fetch(requestURL)
+        fetch('http://' + requestURL)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -32,7 +32,7 @@ document.querySelectorAll('button.view3D').forEach((btn) => {
         console.log("3D view " + btn.dataset.caseName);
         let requestURL = (HOSTNAME_URL + RESTfulAPI_URLS.labels).replace(999, btn.dataset.caseName);
         console.log(requestURL);
-        fetch(requestURL)
+        fetch('http://' + requestURL)
             .then(res => res.json())
             .then(data => {
                 console.log(`Enhancing tumor length: ${data.et_length}`);
