@@ -21,9 +21,8 @@ document.querySelectorAll('button.delete_case').forEach((btn) => {
         console.log((HOSTNAME_URL + RESTfulAPI_URLS.delete_case).replace(999, btn.dataset.id));
 
         fetch(('http://' + HOSTNAME_URL + RESTfulAPI_URLS.delete_case).replace(999, btn.dataset.id))
+        .then(() => {location.reload();})
         .catch(err => {alert(err)});
-
-        //location.reload();
     });
 });
 
