@@ -2,10 +2,22 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
+{% block css_link %}
+    <link rel="stylesheet" href="{% static 'BraTS_3D_viewer/css/case_list.css' %}">
+{% endblock %}
+
 {% block content %}
-    <h2>MRI case list</h2>
-    
+    <style type="text/css">
+        .jumbotron{
+            margin-top: 0px;
+            background-image: url("{% static 'BraTS_3D_viewer/imgs/brain_background.jpg' %}");
+            background-size: cover;
+            height: 800px;
+        }
+    </style>
+    <div class="jumbotron jumbotron-fluid"></div>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload-MRI-modal">Upload new MRI cases</button>
+    
     <!-- modal -->
     <div class="modal fade" id="upload-MRI-modal" role="dialog" tabindex="-1" aria-labelledby="upload-MRI-modal-title" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -27,14 +39,14 @@
         </div>
     </div>
     <!-- modal -->
-    <div class="container-fluid">
+    
+    <div class="container bg-white shadow rounded" id="BraTS-container">
         <div class="row">
-            <div class="col" id="case_list_container">
+            <div class="col-sm mx-2 my-2" id="case_list_container">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Case ID</th>
-                            <th>Retrieve ID</th>
                             <th>Operations</th>
                         </tr>
                     </thead>
@@ -42,7 +54,6 @@
                         {% for c in cases %}
                         <tr>
                             <td>{{ c.case_id }}</td>
-                            <td>{{ c.id }}</td>
                             <td>
                                 <button class="btn btn-light inference" data-case-name="{{ c.case_id }}">Predict</button>
                                 <button class="btn btn-light view3D" data-case-name="{{ c.case_id }}">View</button>
@@ -53,7 +64,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col" id="viewer_container" style="width:100%;height:100%">
+            <div class="col-sm mx-2 my-2" id="viewer_container" style="width:100%;height:100%">
                 <!-- <iframe width="900" height="800" frameborder="0" scrolling="no" src="//plot.ly/~MartinMa28/108.embed"></iframe> -->
             </div>
         </div>
