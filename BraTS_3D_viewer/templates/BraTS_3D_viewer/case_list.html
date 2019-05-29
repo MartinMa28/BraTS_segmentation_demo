@@ -25,7 +25,7 @@
                         <a class="nav-link" href="https://www.cbica.upenn.edu/BraTS18/lboardValidation.html">BraTS leaderboard</a>
                     </li>
                 </ul>
-                <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#upload-MRI-modal">New MRI</button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#upload-MRI-modal">New MRI</button>
             </div>
         </nav>
     </header>
@@ -82,7 +82,7 @@
                             <td>
                                 <button class="btn btn-light inference" data-case-name="{{ c.case_id }}">Predict</button>
                                 <button class="btn btn-light view3D" data-case-name="{{ c.case_id }}">View</button>
-                                <button class="btn btn-danger delete_case" data-id="{{ c.id }}">Delete</button>
+                                <button class="btn btn-light delete_case" data-id="{{ c.id }}">Delete</button>
                             </td>
                         </tr>
                         {% endfor %}
