@@ -1,7 +1,9 @@
 document.querySelectorAll('button.inference').forEach((btn) => {
     btn.addEventListener('click', () => {
         console.log("inference " + btn.dataset.caseName);
-        fetch(`http://10.253.218.12:8000/inference/${btn.dataset.caseName}`)
+        let requestURL = (HOSTNAME_URL + RESTfulAPI_URLS.inference).replace(999, btn.dataset.caseName);
+        console.log(requestURL);
+        fetch(requestURL)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -28,7 +30,9 @@ document.querySelectorAll('button.delete_case').forEach((btn) => {
 document.querySelectorAll('button.view3D').forEach((btn) => {
     btn.addEventListener('click', () => {
         console.log("3D view " + btn.dataset.caseName);
-        fetch(`http://10.253.218.12:8000/labels/${btn.dataset.caseName}`)
+        let requestURL = (HOSTNAME_URL + RESTfulAPI_URLS.labels).replace(999, btn.dataset.caseName);
+        console.log(requestURL);
+        fetch(requestURL)
             .then(res => res.json())
             .then(data => {
                 console.log(`Enhancing tumor length: ${data.et_length}`);
