@@ -1,3 +1,52 @@
 div#BraTS-container {
     margin-top: -220px;
+    min-height: 300px;
+}
+
+#BraTS-navbar.navbar-nav .nav-link, #BraTS-navbar.navbar-nav .nav-link:visited {
+    color: #B2A88D;
+}
+
+#BraTS-navbar.navbar-nav .nav-link:hover {
+    color: #DDC4AC;
+}
+
+.btn-outline-primary#MRI-btn, .btn-outline-primary#MRI-btn:focus {
+    color: #DDC4AC;
+    border: 1px solid #DDC4AC;
+    box-shadow: none;
+}
+
+.btn-outline-primary#MRI-btn:link, .btn-outline-primary#MRI-btn:visited, .btn-outline-primary#MRI-btn:hover {
+    background-color: #DDC4AC;
+    border: 1px solid #DDC4AC;
+    color: rgb(100, 100, 100);
+    box-shadow: none;
+}
+
+.btn-outline-primary#MRI-btn:active, .btn-outline-primary#MRI-btn:target {
+    background-color: #B2A88D;
+    border: 1px solid #B2A88D;
+    color: rgb(100, 100, 100);
+    box-shadow: none;
+}
+
+.navbar-toggler#toggler-collapse-btn, .navbar-toggler#toggler-collapse-btn:focus {
+    color: #DDC4AC;
+    border: 1px solid #DDC4AC;
+    box-shadow: none;
+}
+
+.btn-outline-primary#MRI-btn:hover {
+    background-color: #DDC4AC;
+    border: 1px solid #DDC4AC;
+    color: rgb(100, 100, 100);
+    box-shadow: none;
+}
+
+.navbar-toggler#toggler-collapse-btn:active, .navbar-toggler#toggler-collapse-btn:target {
+    background-color: #B2A88D;
+    border: 1px solid #B2A88D;
+    color: rgb(100, 100, 100);
+    box-shadow: none;
 }

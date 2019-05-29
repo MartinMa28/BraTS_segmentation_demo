@@ -12,12 +12,12 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="https://github.com/MartinMa28">Yilin Ma Github profile</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button id="toggler-collapse-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav mr-auto" id="BraTS-navbar">
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/MartinMa28/brain-tumor-segmentation">Github Repo</a>
                     </li>
@@ -25,7 +25,7 @@
                         <a class="nav-link" href="https://www.cbica.upenn.edu/BraTS18/lboardValidation.html">BraTS leaderboard</a>
                     </li>
                 </ul>
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#upload-MRI-modal">New MRI</button>
+                <button type="button" id="MRI-btn" class="btn btn-outline-primary" data-toggle="modal" data-target="#upload-MRI-modal">New MRI</button>
             </div>
         </nav>
     </header>

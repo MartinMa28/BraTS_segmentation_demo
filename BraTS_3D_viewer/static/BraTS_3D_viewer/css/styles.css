@@ -37,23 +37,3 @@ header nav.navbar {
 #page-footer h3 {
     font-family: 'Courier New', Courier, monospace;
 }
-
-.btn-outline-primary {
-    color: #DDC4AC;
-    border-color: #DDC4AC;
-}
-
-.btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
-    background-color: #DDC4AC;
-    border-color: #DDC4AC;
-    color: rgb(100, 100, 100);
-}
-/* .btn-primary {
-    background-color: #c7ac12;
-    color: #ffffff;
-    
-}
-
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-    background-color: #dbd253;
-} */
