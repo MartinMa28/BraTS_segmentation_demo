@@ -59,7 +59,9 @@
                         {% csrf_token %}
                         {{ form|crispy }}
                     </form>
-                    <div line-progressbar data-percentage="0" data-radius="5px" data-progress-color="#1abc9c" id="MRI-progress-bar" style="visibility: hidden;"></div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
                 
                 <div class="modal-footer">

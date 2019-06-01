@@ -4,7 +4,7 @@ document.querySelector('button#modal-upload-btn').addEventListener('click', () =
 
     let xhr = new XMLHttpRequest();
     
-    let progressBar = document.querySelector('div#MRI-progress-bar');
+    let progressBar = document.querySelector('div#.progress');
     progressBar.style.visibility = 'visible';
     
     let uploadBtn = document.querySelector('button#modal-upload-btn');
@@ -16,7 +16,9 @@ document.querySelector('button#modal-upload-btn').addEventListener('click', () =
                 console.log(xhr.responseText);
                 uploadBtn.removeAttribute('disabled');
                 progressBar.style.visibility = 'hidden';
-                progressBar.dataset.percentage = 0;
+                progressBar.setAttribute('aria-valuenow', 0);
+                progressBar.style.width = "0%";
+                progressBar.textContent = '';
             } else {
                 alert('There was a problem with the request.');
             }
@@ -27,7 +29,10 @@ document.querySelector('button#modal-upload-btn').addEventListener('click', () =
         if (progressEvent.lengthComputable) {
             let p = (progressEvent.loaded / progressEvent.total) * 100;
             console.log(p);
-            progressBar.dataset.percentage = p.toPrecision(3);
+            progressBar.setAttribute('aria-valuenow', p.toPrecision(3));
+            progressBar.style.width = `${p.toPrecision(3)}%`;
+            progressBar.textContent = `${p.toPrecision(3)}%`;
+            
         }
     });
 
