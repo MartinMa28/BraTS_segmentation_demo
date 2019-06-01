@@ -25,8 +25,8 @@ document.querySelector('button#modal-upload-btn').addEventListener('click', () =
     
     xhr.upload.addEventListener('progress', (progressEvent) => {
         if (progressEvent.lengthComputable) {
-            console.log(`${progressEvent.loaded}/${progressEvent.total}`);
             let p = (progressEvent.loaded / progressEvent.total) * 100;
+            console.log(p);
             progressBar.dataset.percentage = p.toPrecision(3);
         }
     });
