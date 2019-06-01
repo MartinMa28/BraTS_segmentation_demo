@@ -25,6 +25,7 @@ document.querySelector('button#modal-upload-btn').addEventListener('click', () =
         if (progressEvent.lengthComputable) {
             //console.log(`${progressEvent.loaded}/${progressEvent.total}`);
             let progress = (progressEvent.loaded / progressEvent.total) * 100;
+            console.log(progress.toPrecision(3));
             loadingBar.dataset.value = progress.toPrecision(3);
         }
     });
