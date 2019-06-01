@@ -6,6 +6,7 @@ document.querySelector('button#modal-upload-btn').addEventListener('click', () =
     
     let loadingBar = document.querySelector('div.ldBar');
     loadingBar.style.visibility = 'visible';
+    let bar = new ldBar("#MRI-ldBar");
     let uploadBtn = document.querySelector('button#modal-upload-btn');
     uploadBtn.setAttribute("disabled", "");
 
@@ -25,7 +26,6 @@ document.querySelector('button#modal-upload-btn').addEventListener('click', () =
         if (progressEvent.lengthComputable) {
             //console.log(`${progressEvent.loaded}/${progressEvent.total}`);
             let progress = (progressEvent.loaded / progressEvent.total) * 100;
-            let bar = new ldBar("#MRI-ldBar");
             bar.set(progress.toPrecision(3));
         }
     });
