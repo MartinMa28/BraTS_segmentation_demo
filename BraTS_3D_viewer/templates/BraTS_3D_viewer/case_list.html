@@ -4,7 +4,7 @@
 
 
 {% block css_link %}
-    <link rel="stylesheet" href="{% static 'BraTS_3D_viewer/css/loading-bar.css' %}">
+    <link rel="stylesheet" href="{% static 'BraTS_3D_viewer/css/jquery.lineProgressbar.css' %}" />
     <link rel="stylesheet" href="{% static 'BraTS_3D_viewer/css/case_list.css' %}">
 {% endblock %}
 
@@ -59,8 +59,9 @@
                         {% csrf_token %}
                         {{ form|crispy }}
                     </form>
+                    <div line-progressbar data-radius="5px" data-progress-color="#1abc9c" id="MRI-progress-bar" style="visibility: hidden;"></div>
                 </div>
-                <div id="MRI-ldBar" style="width: 20%; height: 20%; visibility: hidden;"></div>
+                
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="modal-upload-btn">Upload</button>
                 </div>
@@ -110,7 +111,9 @@
             labels: "{% url 'BraTS_3D_viewer:labels' 999 %}"
         };
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
+    <script src="{% static 'BraTS_3D_viewer/js/jquery.lineProgressbar.js' %}"></script>
     <script src="{% static 'BraTS_3D_viewer/js/plotly-latest.min.js' %}"></script>
-    <script src="{% static 'BraTS_3D_viewer/js/loading-bar.js' %}"></script>
     <script src="{% static 'BraTS_3D_viewer/js/scripts.js' %}"></script>
 {% endblock %}
