@@ -4,7 +4,7 @@ document.querySelector('button#modal-upload-btn').addEventListener('click', () =
 
     let xhr = new XMLHttpRequest();
     
-    let progressBar = document.querySelector('div#.progress');
+    let progressBar = document.querySelector('div.progress-bar');
     progressBar.style.visibility = 'visible';
     
     let uploadBtn = document.querySelector('button#modal-upload-btn');
