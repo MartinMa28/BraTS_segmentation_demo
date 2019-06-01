@@ -4,7 +4,6 @@
 
 
 {% block css_link %}
-    <link rel="stylesheet" href="{% static 'BraTS_3D_viewer/css/jquery.lineProgressbar.css' %}" />
     <link rel="stylesheet" href="{% static 'BraTS_3D_viewer/css/case_list.css' %}">
 {% endblock %}
 
@@ -60,7 +59,7 @@
                         {{ form|crispy }}
                     </form>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="visibility: hidden;"></div>
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
                 
@@ -113,9 +112,6 @@
             labels: "{% url 'BraTS_3D_viewer:labels' 999 %}"
         };
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
-    <script src="{% static 'BraTS_3D_viewer/js/jquery.lineProgressbar.js' %}"></script>
     <script src="{% static 'BraTS_3D_viewer/js/plotly-latest.min.js' %}"></script>
     <script src="{% static 'BraTS_3D_viewer/js/scripts.js' %}"></script>
 {% endblock %}

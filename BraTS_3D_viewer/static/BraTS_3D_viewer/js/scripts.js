@@ -5,7 +5,6 @@ document.querySelector('button#modal-upload-btn').addEventListener('click', () =
     let xhr = new XMLHttpRequest();
     
     let progressBar = document.querySelector('div.progress-bar');
-    progressBar.style.visibility = 'visible';
     
     let uploadBtn = document.querySelector('button#modal-upload-btn');
     uploadBtn.setAttribute("disabled", "");
@@ -15,7 +14,6 @@ document.querySelector('button#modal-upload-btn').addEventListener('click', () =
             if (xhr.status === 200) {
                 console.log(xhr.responseText);
                 uploadBtn.removeAttribute('disabled');
-                progressBar.style.visibility = 'hidden';
                 progressBar.setAttribute('aria-valuenow', 0);
                 progressBar.style.width = "0%";
                 progressBar.textContent = '';
