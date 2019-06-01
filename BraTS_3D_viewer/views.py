@@ -35,7 +35,9 @@ def upload_case(request):
         form = MRICaseForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('BraTS_3D_viewer:case_list')
+            return JsonResponse({'status': 'Success'})
+        else:
+            return JsonResponse({'status': 'Failed to upload MRI scans.'})
 
     # for GET request        
     form = MRICaseForm()

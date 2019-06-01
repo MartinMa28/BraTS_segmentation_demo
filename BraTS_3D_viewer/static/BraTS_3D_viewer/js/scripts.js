@@ -1,3 +1,39 @@
+document.querySelector('button#modal-upload-btn').addEventListener('click', () => {
+    let formElement = document.querySelector('div.modal-body form');
+    let formData = new FormData(formElement);
+
+    // fetch(formElement.action, {
+    //     method: 'POST',
+    //     body: formData,
+    // }).then(res => res.json())
+    // .then(data => {
+    //     console.log(data.status);
+    //     if (data.status == 'Success'){
+    //         location.reload();
+    //     }
+    //     else {
+    //         alert(data.status);
+    //     }
+    // })
+    // .catch(err => {alert(err)});
+    let xhr = new XMLHttpRequest();
+    
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                console.log(xhr.responseText);
+            } else {
+                alert('There was a problem with the request.');
+            }
+          }
+    }
+    
+    xhr.open('POST', formElement.action);
+
+    xhr.send(formData);
+    
+});
+
 document.querySelectorAll('button.inference').forEach((btn) => {
     btn.addEventListener('click', () => {
         console.log("inference " + btn.dataset.caseName);

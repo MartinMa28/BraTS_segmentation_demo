@@ -57,7 +57,7 @@
                     <form action="{% url 'BraTS_3D_viewer:case_upload' %}" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form|crispy }}
-                        <button type="submit">Upload</button>
+                        <button type="button" id="modal-upload-btn">Upload</button>
                     </form>
                 </div>
             </div>
