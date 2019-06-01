@@ -1,3 +1,29 @@
+function updateCaseList(data) {
+    // remove all of rows under the tbody
+    tBody = document.querySelector('tbody');
+    tRows = document.querySelectorAll('tbody tr');
+
+    tRows.forEach((row) => {
+        tBody.removeChild(row);
+    });
+
+    // update the tbody with new rows retrieved from the server
+    newCases = data.cases;
+    
+    newCases.forEach((newCase) => {
+        newRow = document.createElement('tr');
+        newRow.innerHTML = `
+        <td>${newCase.case_id}</td>
+        <td>
+            <button class="btn btn-light inference" data-case-name=${newCase.case_id}>Predict</button>
+            <button class="btn btn-light view3D" data-case-name=${newCase.case_id}>View</button>
+            <button class="btn btn-light delete_case" data-id=${newCase.id}>Delete</button>
+        </td>
+        `
+        tBody.appendChild(newRow);
+    })
+}
+
 document.querySelector('button#modal-upload-btn').addEventListener('click', () => {
     let formElement = document.querySelector('div.modal-body form');
     let formData = new FormData(formElement);
@@ -17,8 +43,16 @@ document.querySelector('button#modal-upload-btn').addEventListener('click', () =
                 progressBar.setAttribute('aria-valuenow', 0);
                 progressBar.style.width = "0%";
                 progressBar.textContent = '';
+                let requestURL = 'http://' + HOSTNAME_URL + RESTfulAPI_URLS.get_cases;
+                fetch(requestURL)
+                    .then(res => res.json())
+                    .then(data => {
+                        updateCaseList(data);
+                    })
+                    .catch(err => {alert(err);});
+            
             } else {
-                alert('There was a problem with the request.');
+                alert('There was a problem when uploading MRI cases.');
             }
           }
     }

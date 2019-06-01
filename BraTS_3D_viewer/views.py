@@ -30,6 +30,13 @@ def case_list(request):
         'form': form
     })
 
+def get_cases(request):
+    # cases
+    cases = MRICase.objects.all()
+    cases = list(map(lambda c: {'case_id': c.case_id, 'id': c.id}, cases))
+
+    return JsonResponse({'cases': cases})
+
 def upload_case(request):
     if request.method == 'POST':
         form = MRICaseForm(request.POST, request.FILES)

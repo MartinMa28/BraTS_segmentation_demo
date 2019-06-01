@@ -109,7 +109,8 @@
         const RESTfulAPI_URLS = {
             delete_case: "{% url 'BraTS_3D_viewer:case_delete' 999 %}",
             inference: "{% url 'BraTS_3D_viewer:inference' 999 %}",
-            labels: "{% url 'BraTS_3D_viewer:labels' 999 %}"
+            labels: "{% url 'BraTS_3D_viewer:labels' 999 %}",
+            get_cases: "{% url 'BraTS_3D_viewer:get_cases' %}"
         };
     </script>
     <script src="{% static 'BraTS_3D_viewer/js/plotly-latest.min.js' %}"></script>
