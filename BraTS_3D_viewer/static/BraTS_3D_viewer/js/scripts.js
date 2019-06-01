@@ -5,6 +5,8 @@ document.querySelector('button#modal-upload-btn').addEventListener('click', () =
     let xhr = new XMLHttpRequest();
     
     let bar = new ldBar("#MRI-ldBar");
+    let ldBar = document.querySelector('#MRI-ldBar');
+    ldBar.getElementsByClassName.visibility = 'visible';
     let uploadBtn = document.querySelector('button#modal-upload-btn');
     uploadBtn.setAttribute("disabled", "");
 
@@ -13,6 +15,7 @@ document.querySelector('button#modal-upload-btn').addEventListener('click', () =
             if (xhr.status === 200) {
                 console.log(xhr.responseText);
                 bar.set(100);
+                ldBar.style.visibility = 'hidden';
                 uploadBtn.removeAttribute('disabled');
             } else {
                 alert('There was a problem with the request.');
