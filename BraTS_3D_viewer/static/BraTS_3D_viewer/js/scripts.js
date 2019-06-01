@@ -28,6 +28,12 @@ document.querySelector('button#modal-upload-btn').addEventListener('click', () =
           }
     }
     
+    xhr.addEventListener('progress', (progressEvent) => {
+        if (progressEvent.lengthComputable) {
+            console.log(`${progressEvent.loaded}/${progressEvent.total}`);
+        }
+    });
+
     xhr.open('POST', formElement.action);
 
     xhr.send(formData);
