@@ -74,40 +74,140 @@ document.querySelector('button#modal-upload-btn').addEventListener('click', () =
     
 });
 
-document.querySelectorAll('button.inference').forEach((btn) => {
-    btn.addEventListener('click', () => {
-        console.log("inference " + btn.dataset.caseName);
-        let requestURL = (HOSTNAME_URL + RESTfulAPI_URLS.inference).replace(999, btn.dataset.caseName);
+// document.querySelectorAll('button.inference').forEach((btn) => {
+//     btn.addEventListener('click', () => {
+//         console.log("inference " + btn.dataset.caseName);
+//         let requestURL = (HOSTNAME_URL + RESTfulAPI_URLS.inference).replace(999, btn.dataset.caseName);
+//         console.log(requestURL);
+//         fetch('http://' + requestURL)
+//             .then(res => res.json())
+//             .then(data => {
+//                 console.log(data);
+//                 btn.textContent = 'Predict';
+//             })
+//             .catch((err) => {alert(err);});
+        
+//         btn.textContent = "Predicting ...";
+//     });
+// });
+
+// event delegation for button.inference
+document.querySelector('tbody').addEventListener('click', (e) => {
+    if (e.target && e.target.matches('button.inference')) {
+        let requestURL = 'http://' + (HOSTNAME_URL + RESTfulAPI_URLS.inference).replace(999, e.target.dataset.caseName);
         console.log(requestURL);
-        fetch('http://' + requestURL)
+        fetch(requestURL)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                btn.textContent = 'Predict';
+                e.target.textContent = 'Predict';
             })
             .catch((err) => {alert(err);});
         
-        btn.textContent = "Predicting ...";
-    });
+        e.target.textContent = 'Predicting ...';
+    }
 });
 
-document.querySelectorAll('button.delete_case').forEach((btn) => {
-    btn.addEventListener('click', () => {
-        console.log(`Delete ${btn.dataset.id}`);
-        console.log((HOSTNAME_URL + RESTfulAPI_URLS.delete_case).replace(999, btn.dataset.id));
 
-        fetch(('http://' + HOSTNAME_URL + RESTfulAPI_URLS.delete_case).replace(999, btn.dataset.id))
-        .then(() => {location.reload();})
+// event delegation for button.delete_case
+document.querySelector('tbody').addEventListener('click', (e) => {
+    if (e.target && e.target.matches('button.delete_case')) {
+        console.log((HOSTNAME_URL + RESTfulAPI_URLS.delete_case).replace(999, e.target.dataset.id));
+
+        fetch(('http://' + HOSTNAME_URL + RESTfulAPI_URLS.delete_case).replace(999, e.target.dataset.id))
+        .then(() => {
+            let requestURL = 'http://' + HOSTNAME_URL + RESTfulAPI_URLS.get_cases;
+            fetch(requestURL)
+                .then(res => res.json())
+                .then(data => {
+                    updateCaseList(data);
+                })
+                .catch(err => {alert(err);});
+        })
         .catch(err => {alert(err)});
-    });
+    }
 });
 
-document.querySelectorAll('button.view3D').forEach((btn) => {
-    btn.addEventListener('click', () => {
-        console.log("3D view " + btn.dataset.caseName);
-        let requestURL = (HOSTNAME_URL + RESTfulAPI_URLS.labels).replace(999, btn.dataset.caseName);
+// document.querySelectorAll('button.view3D').forEach((btn) => {
+//     btn.addEventListener('click', () => {
+//         console.log("3D view " + btn.dataset.caseName);
+//         let requestURL = (HOSTNAME_URL + RESTfulAPI_URLS.labels).replace(999, btn.dataset.caseName);
+//         console.log(requestURL);
+//         fetch('http://' + requestURL)
+//             .then(res => res.json())
+//             .then(data => {
+//                 console.log(`Enhancing tumor length: ${data.et_length}`);
+//                 console.log(`Edema length: ${data.edema_length}`);
+//                 console.log(`Necrotic tumor length: ${data.necrotic_length}`);
+                
+//                 let etTrace = {
+//                     x: data.et_xs,
+//                     y: data.et_ys,
+//                     z: data.et_zs,
+//                     mode: 'markers',
+//                     marker: {
+//                         size: 3,
+//                         color: 'rgb(255, 255, 79)',
+//                         opacity: 0.8
+//                     },
+//                     type: 'scatter3d'
+//                 };
+
+//                 let edemaTrace = {
+//                     x: data.edema_xs,
+//                     y: data.edema_ys,
+//                     z: data.edema_zs,
+//                     mode: 'markers',
+//                     marker: {
+//                         size: 3,
+//                         color: 'rgb(0, 153, 153)',
+//                         opacity: 0.8
+//                     },
+//                     type: 'scatter3d'
+//                 };
+
+//                 let necroticTrace = {
+//                     x: data.necrotic_xs,
+//                     y: data.necrotic_ys,
+//                     z: data.necrotic_zs,
+//                     mode: 'markers',
+//                     marker: {
+//                         size: 3,
+//                         color: 'rgb(104, 47, 162)',
+//                         opacity: 0.8
+//                     },
+//                     type: 'scatter3d'
+//                 };
+
+//                 let scatterData = [etTrace, edemaTrace, necroticTrace];
+                
+//                 let layout = {
+//                     margin: {
+//                         l: 0,
+//                         r: 0,
+//                         b: 0,
+//                         t: 0
+//                     }
+//                 };
+
+//                 Plotly.newPlot('viewer_container', scatterData, layout);
+                
+//                 btn.textContent = 'View';
+//             })
+//             .catch((err) => {
+//                 alert(err);
+//             });
+        
+//         btn.textContent = 'Plotting...';
+//     });
+// });
+
+// event delegation for button.view3D
+document.queryCommandValue('tbody').addEventListener('click', (e) => {
+    if (e.target && e.target.matches('button.view3D')) {
+        let requestURL = 'http://' + (HOSTNAME_URL + RESTfulAPI_URLS.labels).replace(999, e.target.caseName);
         console.log(requestURL);
-        fetch('http://' + requestURL)
+        fetch(requestURL)
             .then(res => res.json())
             .then(data => {
                 console.log(`Enhancing tumor length: ${data.et_length}`);
@@ -166,12 +266,12 @@ document.querySelectorAll('button.view3D').forEach((btn) => {
 
                 Plotly.newPlot('viewer_container', scatterData, layout);
                 
-                btn.textContent = 'View';
+                e.target.textContent = 'View';
             })
             .catch((err) => {
                 alert(err);
             });
         
-        btn.textContent = 'Plotting...';
-    });
+        e.target.textContent = 'Plotting...';
+    }
 });
