@@ -89,7 +89,6 @@ document.querySelector('button#modal-upload-btn').addEventListener('click', () =
 // event delegation for button.inference
 document.querySelector('tbody').addEventListener('click', (e) => {
     if (e.target && e.target.matches('button.inference')) {
-        e.target.textContent = 'Predicting ...';
         let spinner = document.getElementById(`${e.target.dataset.id}-inference-spinner`);
         spinner.style.visibility = 'visible';
         let requestURL = 'http://' + (HOSTNAME_URL + RESTfulAPI_URLS.inference).replace(999, e.target.dataset.caseName);
@@ -99,7 +98,6 @@ document.querySelector('tbody').addEventListener('click', (e) => {
             .then(data => {
                 console.log(data);
                 spinner.style.visibility = 'hidden';
-                e.target.textContent = 'Predict';
             })
             .catch((err) => {alert(err);});
     }
@@ -132,7 +130,6 @@ document.querySelector('tbody').addEventListener('click', (e) => {
 // event delegation for button.view3D
 document.querySelector('tbody').addEventListener('click', (e) => {
     if (e.target && e.target.matches('button.view3D')) {
-        e.target.textContent = 'Plotting...';
         let spinner = document.getElementById(`${e.target.dataset.id}-view-spinner`);
         spinner.style.visibility = 'visible';
         let requestURL = 'http://' + (HOSTNAME_URL + RESTfulAPI_URLS.labels).replace(999, e.target.dataset.caseName);
@@ -196,7 +193,6 @@ document.querySelector('tbody').addEventListener('click', (e) => {
 
                 Plotly.newPlot('viewer_container', scatterData, layout);
                 
-                e.target.textContent = 'View';
                 spinner.style.visibility = 'hidden';
             })
             .catch((err) => {
