@@ -205,7 +205,7 @@ document.querySelector('tbody').addEventListener('click', (e) => {
 // event delegation for button.view3D
 document.querySelector('tbody').addEventListener('click', (e) => {
     if (e.target && e.target.matches('button.view3D')) {
-        let requestURL = 'http://' + (HOSTNAME_URL + RESTfulAPI_URLS.labels).replace(999, e.target.caseName);
+        let requestURL = 'http://' + (HOSTNAME_URL + RESTfulAPI_URLS.labels).replace(999, e.target.dataset.caseName);
         console.log(requestURL);
         fetch(requestURL)
             .then(res => res.json())
