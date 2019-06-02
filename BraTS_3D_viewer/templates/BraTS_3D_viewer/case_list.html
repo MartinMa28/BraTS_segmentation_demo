@@ -86,9 +86,20 @@
                         <tr>
                             <td>{{ c.case_id }}</td>
                             <td>
-                                <button class="btn btn-light inference" data-case-name="{{ c.case_id }}">Predict</button>
-                                <button class="btn btn-light view3D" data-case-name="{{ c.case_id }}">View</button>
-                                <button class="btn btn-light delete_case" data-id="{{ c.id }}">Delete</button>
+                                <div class="btn-group" role="group" aria-label="operations-group">
+                                    <button class="btn btn-light btn-sm inference" data-case-name="{{ c.case_id }}" data-id="{{ c.id }}">
+                                        Predict
+                                        <span class="spinner-border spinner-border-sm" role="status" style="visibility: hidden;" id="{{ c.id }}-inference-spinner"></span>
+                                    </button>
+                                    <button class="btn btn-light btn-sm view3D" data-case-name="{{ c.case_id }}" data-id="{{ c.id }}">
+                                        View
+                                        <span class="spinner-border spinner-border-sm" role="status" style="visibility: hidden;" id="{{ c.id }}-view-spinner"></span>
+                                    </button>
+                                    <button class="btn btn-light btn-sm delete_case" data-case-name="{{ c.case_id }}" data-id="{{ c.id }}">
+                                        Delete
+                                        <span class="spinner-border spinner-border-sm" role="status" style="visibility: hidden;" id="{{ c.id }}-delete-spinner"></span>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                         {% endfor %}

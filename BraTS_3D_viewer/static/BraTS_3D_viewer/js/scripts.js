@@ -15,9 +15,20 @@ function updateCaseList(data) {
         newRow.innerHTML = `
         <td>${newCase.case_id}</td>
         <td>
-            <button class="btn btn-light inference" data-case-name=${newCase.case_id}>Predict</button>
-            <button class="btn btn-light view3D" data-case-name=${newCase.case_id}>View</button>
-            <button class="btn btn-light delete_case" data-id=${newCase.id}>Delete</button>
+            <div class="btn-group" role="group" aria-label="operations-group">
+                <button class="btn btn-light btn-sm inference" data-case-name="${newCase.case_id}" data-id="${newCase.id}">
+                    Predict
+                    <span class="spinner-border spinner-border-sm" role="status" style="visibility: hidden;" id="${newCase.id}-inference-spinner"></span>
+                </button>
+                <button class="btn btn-light btn-sm view3D" data-case-name="${newCase.case_id}" data-id="${newCase.id}">
+                    View
+                    <span class="spinner-border spinner-border-sm" role="status" style="visibility: hidden;" id="${newCase.id}-view-spinner"></span>
+                </button>
+                <button class="btn btn-light btn-sm delete_case" data-case-name="${newCase.case_id}" data-id="${newCase.id}">
+                    Delete
+                    <span class="spinner-border spinner-border-sm" role="status" style="visibility: hidden;" id="${newCase.id}-delete-spinner"></span>
+                </button>
+            </div>
         </td>
         `
         tBody.appendChild(newRow);
@@ -78,17 +89,19 @@ document.querySelector('button#modal-upload-btn').addEventListener('click', () =
 // event delegation for button.inference
 document.querySelector('tbody').addEventListener('click', (e) => {
     if (e.target && e.target.matches('button.inference')) {
+        e.target.textContent = 'Predicting ...';
+        let spinner = document.getElementById(`${e.target.dataset.id}-inference-spinner`);
+        spinner.style.visibility = 'visible';
         let requestURL = 'http://' + (HOSTNAME_URL + RESTfulAPI_URLS.inference).replace(999, e.target.dataset.caseName);
         console.log(requestURL);
         fetch(requestURL)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
+                spinner.style.visibility = 'hidden';
                 e.target.textContent = 'Predict';
             })
             .catch((err) => {alert(err);});
-        
-        e.target.textContent = 'Predicting ...';
     }
 });
 
@@ -96,6 +109,8 @@ document.querySelector('tbody').addEventListener('click', (e) => {
 // event delegation for button.delete_case
 document.querySelector('tbody').addEventListener('click', (e) => {
     if (e.target && e.target.matches('button.delete_case')) {
+        let spinner = document.getElementById(`${e.target.dataset.id}-delete-spinner`);
+        spinner.style.visibility = 'visible';
         console.log((HOSTNAME_URL + RESTfulAPI_URLS.delete_case).replace(999, e.target.dataset.id));
 
         fetch(('http://' + HOSTNAME_URL + RESTfulAPI_URLS.delete_case).replace(999, e.target.dataset.id))
@@ -104,6 +119,7 @@ document.querySelector('tbody').addEventListener('click', (e) => {
             fetch(requestURL)
                 .then(res => res.json())
                 .then(data => {
+                    spinner.style.visibility = 'hidden';
                     updateCaseList(data);
                 })
                 .catch(err => {alert(err);});
@@ -116,6 +132,9 @@ document.querySelector('tbody').addEventListener('click', (e) => {
 // event delegation for button.view3D
 document.querySelector('tbody').addEventListener('click', (e) => {
     if (e.target && e.target.matches('button.view3D')) {
+        e.target.textContent = 'Plotting...';
+        let spinner = document.getElementById(`${e.target.dataset.id}-view-spinner`);
+        spinner.style.visibility = 'visible';
         let requestURL = 'http://' + (HOSTNAME_URL + RESTfulAPI_URLS.labels).replace(999, e.target.dataset.caseName);
         console.log(requestURL);
         fetch(requestURL)
@@ -178,11 +197,10 @@ document.querySelector('tbody').addEventListener('click', (e) => {
                 Plotly.newPlot('viewer_container', scatterData, layout);
                 
                 e.target.textContent = 'View';
+                spinner.style.visibility = 'hidden';
             })
             .catch((err) => {
                 alert(err);
             });
-        
-        e.target.textContent = 'Plotting...';
     }
 });
