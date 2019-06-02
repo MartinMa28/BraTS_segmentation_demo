@@ -198,11 +198,15 @@ document.querySelector('tbody').addEventListener('click', (e) => {
                     Plotly.deleteTraces('viewer_container', [0, 1, 2]);
                     // add newly created traces
                     Plotly.addTraces('viewer_container', scatterData);
-                }
-
-                Plotly.newPlot('viewer_container', scatterData, layout);
+                    console.log('update previous plot');
+                    spinner.style.visibility = 'hidden';
+                }else {
+                    // have not drawn a plot before, plot a new one
+                    console.log('new plot');
+                    Plotly.newPlot('viewer_container', scatterData, layout);
                 
-                spinner.style.visibility = 'hidden';
+                    spinner.style.visibility = 'hidden';
+                }
             })
             .catch((err) => {
                 alert(err);
