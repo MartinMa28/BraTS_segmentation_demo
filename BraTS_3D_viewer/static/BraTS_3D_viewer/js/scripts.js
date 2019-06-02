@@ -191,6 +191,13 @@ document.querySelector('tbody').addEventListener('click', (e) => {
                     }
                 };
 
+                
+                let prevPlot = document.querySelector('#viewer_container div.plot-container.plotly');
+                if (prevPlot !== null) {
+                    let viewerContainer = document.querySelector('#viewer_container');
+                    viewerContainer.removeChild(prevPlot);
+                }
+
                 Plotly.newPlot('viewer_container', scatterData, layout);
                 
                 spinner.style.visibility = 'hidden';
