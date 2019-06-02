@@ -203,7 +203,7 @@ document.querySelector('tbody').addEventListener('click', (e) => {
 // });
 
 // event delegation for button.view3D
-document.queryCommandValue('tbody').addEventListener('click', (e) => {
+document.querySelector('tbody').addEventListener('click', (e) => {
     if (e.target && e.target.matches('button.view3D')) {
         let requestURL = 'http://' + (HOSTNAME_URL + RESTfulAPI_URLS.labels).replace(999, e.target.caseName);
         console.log(requestURL);
