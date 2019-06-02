@@ -183,8 +183,6 @@ document.querySelector('tbody').addEventListener('click', (e) => {
                 let scatterData = [etTrace, edemaTrace, necroticTrace];
                 
                 let layout = {
-                    width: "550px",
-                    height: "450px",
                     margin: {
                         l: 0,
                         r: 0,
@@ -199,7 +197,7 @@ document.querySelector('tbody').addEventListener('click', (e) => {
                     // delete previous 3 traces
                     Plotly.deleteTraces('viewer_container', [0, 1, 2]);
                     // add newly created traces
-                    Plotly.addTraces('view_container', scatterData);
+                    Plotly.addTraces('viewer_container', scatterData);
                 }
 
                 Plotly.newPlot('viewer_container', scatterData, layout);
