@@ -71,7 +71,6 @@ document.querySelector('button#modal-upload-btn').addEventListener('click', () =
     xhr.upload.addEventListener('progress', (progressEvent) => {
         if (progressEvent.lengthComputable) {
             let p = (progressEvent.loaded / progressEvent.total) * 100;
-            console.log(p);
             progressBar.setAttribute('aria-valuenow', p.toPrecision(3));
             progressBar.style.width = `${p.toPrecision(3)}%`;
             progressBar.textContent = `${p.toPrecision(3)}%`;
@@ -198,12 +197,10 @@ document.querySelector('tbody').addEventListener('click', (e) => {
                     Plotly.deleteTraces('viewer_container', [0, 1, 2]);
                     // add newly created traces
                     Plotly.addTraces('viewer_container', scatterData);
-                    console.log('update the previous plot');
                     spinner.style.visibility = 'hidden';
                 }else {
                     // have not drawn a plot before, plot a new one
                     Plotly.newPlot('viewer_container', scatterData, layout);
-                    console.log('create a new plot');
                     spinner.style.visibility = 'hidden';
                 }
             })
