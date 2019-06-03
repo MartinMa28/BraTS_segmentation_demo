@@ -1,17 +1,17 @@
 function updateCaseList(data) {
     // remove all of rows under the tbody
-    tBody = document.querySelector('tbody');
-    tRows = document.querySelectorAll('tbody tr');
+    let tBody = document.querySelector('tbody');
+    let tRows = document.querySelectorAll('tbody tr');
 
     tRows.forEach((row) => {
         tBody.removeChild(row);
     });
 
     // update the tbody with new rows retrieved from the server
-    newCases = data.cases;
+    let newCases = data.cases;
     
     newCases.forEach((newCase) => {
-        newRow = document.createElement('tr');
+        let newRow = document.createElement('tr');
         newRow.innerHTML = `
         <td>${newCase.case_id}</td>
         <td>
@@ -193,15 +193,17 @@ document.querySelector('tbody').addEventListener('click', (e) => {
 
                 
                 let prevPlot = document.querySelector('#viewer_container div.plot-container.plotly');
-                if (prevPlot !== null) {
+                if (prevPlot) {
                     // delete previous 3 traces
                     Plotly.deleteTraces('viewer_container', [0, 1, 2]);
                     // add newly created traces
                     Plotly.addTraces('viewer_container', scatterData);
+                    console.log('update the previous plot');
                     spinner.style.visibility = 'hidden';
                 }else {
                     // have not drawn a plot before, plot a new one
                     Plotly.newPlot('viewer_container', scatterData, layout);
+                    console.log('create a new plot');
                     spinner.style.visibility = 'hidden';
                 }
             })
