@@ -127,11 +127,13 @@ def infer(request, case_name):
     
     np.save(os.path.join(seg_dir, case_name), preds)
     
+    pred_labels = np.unique(preds).tolist()
     # release GPU memory
     del model
+    del preds
     torch.cuda.empty_cache()
 
-    return JsonResponse({'labels': np.unique(preds).tolist()})
+    return JsonResponse({'labels': pred_labels})
 
 
 def view3D(request, case_name):
