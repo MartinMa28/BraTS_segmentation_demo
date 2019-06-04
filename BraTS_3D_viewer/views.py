@@ -129,15 +129,15 @@ def infer(request, case_name):
     
     preds = np.unique(preds).tolist()
     # release GPU memory
-    model = model.cpu()
-    slice_i = slice_i.cpu()
-    output = output.cpu()
     del model
     del slice_i
     del pred
     del output
     del device
     torch.cuda.empty_cache()
+    
+    print(f'memory allocated: {torch.cuda.memory_allocated()}')
+    print(f'memory cached: {torch.cuda.memory_cached()}')
 
     return JsonResponse({'labels': preds})
 
