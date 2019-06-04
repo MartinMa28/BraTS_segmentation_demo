@@ -133,6 +133,7 @@ def infer(request, case_name):
     del slice_i
     del pred
     del output
+    del device
     torch.cuda.empty_cache()
 
     return JsonResponse({'labels': preds})
