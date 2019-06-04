@@ -126,7 +126,11 @@ def infer(request, case_name):
     print(np.unique(preds), preds.shape)
     
     np.save(os.path.join(seg_dir, case_name), preds)
-        
+    
+    # release GPU memory
+    del model
+    torch.cuda.empty_cache()
+
     return JsonResponse({'labels': np.unique(preds).tolist()})
 
 
