@@ -133,11 +133,13 @@ def infer(request, case_name):
     del slice_i
     del pred
     del output
-    del device
+    
     torch.cuda.empty_cache()
     
-    print(f'memory allocated: {torch.cuda.memory_allocated()}')
-    print(f'memory cached: {torch.cuda.memory_cached()}')
+    print(f'memory allocated: {torch.cuda.memory_allocated(device)}')
+    print(f'max memory allocated: {torch.cuda.max_memory_allocated(device)}')
+    print(f'memory cached: {torch.cuda.memory_cached(device)}')
+    print(f'max memory cached: {torch.cuda.max_memory_cached(device)}')
 
     return JsonResponse({'labels': preds})
 
